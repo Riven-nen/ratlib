@@ -55,4 +55,11 @@ public class POSManager {
         }
     }
 
+    public void printProducts() {
+        System.out.println("ID\tName\tPrice\tStock");
+                        
+        for (Product product : getProducts()) {
+            System.out.printf("%-4d %-10s %7d %5d\n", product.getID(), product.getName(), product.getPrice(), product.getStock());   
+        }
+    }
 }

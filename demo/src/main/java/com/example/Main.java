@@ -155,18 +155,11 @@ public class Main {
                         break;
 
                     case 2:
-                        System.out.println("ID\tName\tPrice\tStock");
-                        for (Product product : posManager.getProducts()) {
-                            System.out.printf("%-4d %-10s %7d %5d\n", product.getID(), product.getName(), product.getPrice(), product.getStock());   
-                        }
+                        posManager.printProducts();
                         break;
 
                     case 3:
-                        System.out.println("ID\tName\tPrice\tStock");
-                        
-                        for (Product product : posManager.getProducts()) {
-                            System.out.printf("%-4d %-10s %7d %5d\n", product.getID(), product.getName(), product.getPrice(), product.getStock());   
-                        }
+                        posManager.printProducts();
 
                         boolean checkout = false;
                         int chooseId = 0;
@@ -196,7 +189,42 @@ public class Main {
                     case 4:
                         transaction.printLog();
                         break;
+
+                    case 5:
+                        posManager.printProducts();
+
+                        int chooseProduct = consoleInt();
+
+                        for (Product product : posManager.getProducts()) {
+                            if (product.getID() == chooseProduct) {
+                                System.out.println("New Name:");
+                                String name = consoleString();
+                                System.out.println("New Price:");
+                                int price = consoleInt();
+                                System.out.println("New Stock:");
+                                int stock = consoleInt();
+                                product.setName(name);
+                                product.setPrice(price);
+                                product.setStock(stock);
+                                break;
+                            }
+                        }
+
+                        System.out.println("Invalid id");
+                        break;
                         
+                    case 6:
+                        posManager.printProducts();
+
+                        System.out.println("Select id to delete:");
+                        int deleteId = consoleInt();
+
+                        for (Product product : posManager.getProducts()) {
+                            if (product.getID() == deleteId) {
+                                posManager.removeProduct(product);
+                            }
+                        }
+
                     default:
                         System.out.println("Invalid choice.");
                         continue;

@@ -11,7 +11,7 @@ public class Transaction {
     // and not a new instantiation of an object.
     private ArrayList<Map<Product,Integer>> cart = new ArrayList<>();
 
-    private ArrayList<Map<Product,Integer>> log = new ArrayList<>();
+    private ArrayList<String[]> log = new ArrayList<>();
 
     /**
      * Checks if the given product is null.
@@ -63,9 +63,9 @@ public class Transaction {
     /**
      * Prints the list of items in the cart, and their prices.
      */
-    public void listCart(ArrayList<Map<Product,Integer>> cart) {
+    public void listCart() {
         if (cart.isEmpty()) {
-            System.out.println("Cart is Empty!");
+            System.out.println("No purchases found!");
         }
 
         for (Map<Product,Integer> item : cart) {
@@ -102,7 +102,17 @@ public class Transaction {
      */
     public void log() {
         for (Map<Product,Integer> item : cart) {
-            log.add(item);
+
+            for (Map.Entry<Product,Integer> entry : item.entrySet()) {
+                int currStock = entry.getKey().getStock();
+                entry.getKey().setStock(currStock - entry.getValue());
+
+                String newName = entry.getKey().getName();
+                String qty = Integer.toString(entry.getValue());
+                String newPrice = Integer.toString(entry.getKey().getPrice());
+                String[] logThis = {newName,"Php"+newPrice,"x"+qty};
+                log.add(logThis);
+            }
         }
         clearCart();
     }
@@ -138,7 +148,11 @@ public class Transaction {
     }
 
     public void printLog() {
-        listCart(log);
-        System.out.println("Total = " + total(log));
+        for (String[] logItem : this.log) {
+            for (String item : logItem) {
+                System.out.print(item+"\t");
+            }
+            System.out.println();
+        }
     }
 }
