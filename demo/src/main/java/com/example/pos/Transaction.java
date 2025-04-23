@@ -11,6 +11,8 @@ public class Transaction {
     // and not a new instantiation of an object.
     private ArrayList<Map<Product,Integer>> cart = new ArrayList<>();
 
+    private ArrayList<Map<Product,Integer>> log = new ArrayList<>();
+
     /**
      * Checks if the given product is null.
      * 
@@ -61,7 +63,7 @@ public class Transaction {
     /**
      * Prints the list of items in the cart, and their prices.
      */
-    public void listCart() {
+    public void listCart(ArrayList<Map<Product,Integer>> cart) {
         if (cart.isEmpty()) {
             System.out.println("Cart is Empty!");
         }
@@ -81,7 +83,7 @@ public class Transaction {
      * the cart list and adding the product of price and quantity 
      * to the variable total for every iteration
      */
-    public int total() {
+    public int total(ArrayList<Map<Product,Integer>> cart) {
         int total = 0;
         for (Map<Product,Integer> item : cart) {
             for (Map.Entry<Product,Integer> entry : item.entrySet()) {
@@ -92,11 +94,18 @@ public class Transaction {
         return total;
     }
 
-    // public ArrayList<CartItem> log(ArrayList<CartItem> cart) {
-    //     for (CartItem cartItem : cart) {
-
-    //     }
-    // }
+    /**
+     * Stores the current contents of the cart in the log and clears the cart.
+     * The log is a list of lists, where each inner list represents a transaction.
+     * The inner lists contain the products purchased and the quantity of each 
+     * product purchased in the transaction.
+     */
+    public void log() {
+        for (Map<Product,Integer> item : cart) {
+            log.add(item);
+        }
+        clearCart();
+    }
 
     /**
      * Removes a product from the cart if it exists in the cart.
@@ -126,5 +135,10 @@ public class Transaction {
      */
     public void clearCart() {
         cart.clear();
+    }
+
+    public void printLog() {
+        listCart(log);
+        System.out.println("Total = " + total(log));
     }
 }

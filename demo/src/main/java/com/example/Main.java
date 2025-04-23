@@ -178,14 +178,14 @@ public class Main {
 
                             for (Product product : posManager.getProducts()) {
                                 if (product.getID() == chooseId) {
-                                    System.out.println(posManager.isProductNull(product));
                                     System.out.println("How many " + product.getName() + " to buy?");
                                     int qty = consoleInt();
-                                    posManager.addToCart(product, qty);
+                                    transaction.addToCart(product, qty);
                                 } else if (chooseId == 0) {
                                     System.out.println("Checking out...");
-                                    System.out.println("The total is " + transaction.total(posManager.getCart()));
+                                    System.out.println("The total is " + transaction.total(transaction.getCart()));
                                     checkout = true;
+                                    transaction.log();
                                     break;
                                 }
                             }                            
@@ -193,7 +193,10 @@ public class Main {
 
                         
                         break;
-
+                    case 4:
+                        transaction.printLog();
+                        break;
+                        
                     default:
                         System.out.println("Invalid choice.");
                         continue;
