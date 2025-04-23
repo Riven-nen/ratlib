@@ -10,11 +10,6 @@ public class POSManager {
      */
     private ArrayList<Product> products = new ArrayList<>();
 
-    // Side note: if cart is handled by another class and updated it will
-    // still work because adding objects to an ArrayList keeps a reference
-    // and not a new instantiation of an object.
-    private ArrayList<CartItem> cart = new ArrayList<>();
-
     /**
      * Adds a product to the inventory
      * @param product product to add

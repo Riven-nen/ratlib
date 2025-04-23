@@ -3,14 +3,13 @@ package com.example.pos;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 public class Transaction {
 
+    // Side note: if cart is handled by another class and updated it will
+    // still work because adding objects to an ArrayList keeps a reference
+    // and not a new instantiation of an object.
     private ArrayList<Map<Product,Integer>> cart = new ArrayList<>();
-    private Product product;
-    private int quantity;
 
     /**
      * Checks if the given product is null.
