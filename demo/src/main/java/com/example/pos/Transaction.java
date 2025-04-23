@@ -1,26 +1,79 @@
 package com.example.pos;
 
 import java.util.ArrayList;
-
-import com.example.pos.POSManager.CartItem;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 public class Transaction {
 
-    private ArrayList<CartItem
+    private ArrayList<Map<Product,Integer>> cart = new ArrayList<>();
+    private Product product;
+    private int quantity;
+
+    /**
+     * Checks if the given product is null.
+     * 
+     * @param product the product to check
+     * @return true if the product is null, false otherwise
+     */
+    public boolean isProductNull(Product product) {
+        return product == null;
+    }
+
+    // function to check if the product already exists in the arraylist
+    public boolean isProductInCart(Product product) {
+        for (Map<Product,Integer> item : cart) {
+            for (Product entry : item.keySet()) {
+                if (entry.equals(product)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds a product to the cart if it is not null and has more than 0 stock
+     * @param product product to add to the cart
+     */
+    public void addToCart(Product product,int quantity) {
+        // Check first if its null then just print an error and break out of method
+        if (isProductNull(product)) {
+            System.out.println("The selected product is null.");
+            return;
+        }
+
+        if (isProductInCart(product)) {
+            System.out.println("Product is already in cart!");
+            return;
+        }
+
+        // Check if the stock of the product is > 0 then just add it to the cart
+        // for the transaction class to handle
+        if (product.getStock() > 0 ) {
+           Map<Product,Integer> item = new HashMap<>();
+           item.put(product, quantity);
+           cart.add(item);
+        } 
+    }
 
     /**
      * Prints the list of items in the cart, and their prices.
-     * @param cart the cart to print
      */
-    public void listCart(ArrayList<CartItem> cart) {
+    public void listCart() {
         if (cart.isEmpty()) {
             System.out.println("Cart is Empty!");
         }
 
-        for (CartItem product : cart) {
-            System.out.println(product.getProduct().getName()
-                                + "\t Php" + product.getProduct().getPrice()
-                                + " x" + product.getQuantity());
+        for (Map<Product,Integer> item : cart) {
+            for (Map.Entry<Product,Integer> entry : item.entrySet()) {
+                System.out.println(entry.getKey().getName()
+                + "\t Php" + entry.getKey().getPrice()
+                + " x" + entry.getValue());
+            }
+
         }
     }
 
@@ -28,20 +81,51 @@ public class Transaction {
      * Prints the total sum of the price by iterating through
      * the cart list and adding the product of price and quantity 
      * to the variable total for every iteration
-     * @param cart
      */
-    public int total(ArrayList<CartItem> cart) {
+    public int total() {
         int total = 0;
-        for (CartItem cItem : cart) {
-            total = (total + cItem.getProduct().getPrice()) * cItem.getQuantity();
-        }
+        for (Map<Product,Integer> item : cart) {
+            for (Map.Entry<Product,Integer> entry : item.entrySet()) {
+                total = (total + entry.getKey().getPrice()) * entry.getValue();
+            }
+       }
 
         return total;
     }
 
-    public ArrayList<CartItem> log(ArrayList<CartItem> cart) {
-        for (CartItem cartItem : cart) {
+    // public ArrayList<CartItem> log(ArrayList<CartItem> cart) {
+    //     for (CartItem cartItem : cart) {
 
+    //     }
+    // }
+
+    /**
+     * Removes a product from the cart if it exists in the cart.
+     * 
+     * @param product the product to remove from the cart
+     */
+    public void removeFromCart(Product product) {
+        for (Map<Product,Integer> item : cart) {
+            for (Map.Entry<Product,Integer> entry : item.entrySet()) {
+                if (entry.getKey().equals(product)) {
+                    cart.remove(item);
+                }
+            }
         }
+     }
+
+    /**
+     * Returns the current items in the cart
+     * @return a list of products in the cart
+     */
+    public ArrayList<Map<Product,Integer>> getCart() {
+        return cart;
+    }
+
+    /**
+     * Removes all items from the cart.
+     */
+    public void clearCart() {
+        cart.clear();
     }
 }

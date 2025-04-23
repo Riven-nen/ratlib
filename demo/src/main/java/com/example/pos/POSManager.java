@@ -15,24 +15,6 @@ public class POSManager {
     // and not a new instantiation of an object.
     private ArrayList<CartItem> cart = new ArrayList<>();
 
-    class CartItem {
-        private Product product;
-        private int quantity;
-
-        CartItem(Product product, int quantity) {
-            this.product = product;
-            this.quantity = quantity;
-        }
-
-        Product getProduct() {
-            return this.product;
-        }
-
-        int getQuantity() {
-            return this.quantity;
-        }
-    }
-
     /**
      * Adds a product to the inventory
      * @param product product to add
@@ -78,62 +60,4 @@ public class POSManager {
         }
     }
 
-    /**
-     * Checks if the given product is null.
-     * 
-     * @param product the product to check
-     * @return true if the product is null, false otherwise
-     */
-    public boolean isProductNull(Product product) {
-        return product == null;
-    }
-
-    /**
-     * Adds a product to the cart if it is not null and has more than 0 stock
-     * @param product product to add to the cart
-     */
-    public void addToCart(Product product,int quantity) {
-        // Check first if its null then just print an error and break out of method
-        if (isProductNull(product)) {
-            System.out.println("The selected product is null.");
-            return;
-        }
-        // Check if the stock of the product is > 0 then just add it to the cart
-        // for the transaction class to handle
-        if (product.getStock() > 0) {
-           cart.add(new CartItem(product, quantity)) ;
-        }
-    }
-
-    /**
-     * Removes a product from the cart if it exists in the cart.
-     * 
-     * @param product the product to remove from the cart
-     */
-    public void removeFromCart(Product product) {
-        for (CartItem cItem : cart) {
-            if (cItem.getProduct().equals(product)) {
-                cart.remove(cItem);
-            }
-        }
-     }
-
-     public void removeFromCart(CartItem cartItem) {
-        cart.remove(cartItem);
-     }
-
-    /**
-     * Returns the current items in the cart
-     * @return a list of products in the cart
-     */
-    public ArrayList<CartItem> getCart() {
-        return cart;
-    }
-
-    /**
-     * Removes all items from the cart.
-     */
-    public void clearCart() {
-        cart.clear();
-    }
 }
