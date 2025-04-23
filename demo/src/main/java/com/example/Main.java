@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.time.LocalTime;
 
 import com.example.pos.*;
-// import com.example.pos.POSManager.CartItem;
 
 public class Main {
     

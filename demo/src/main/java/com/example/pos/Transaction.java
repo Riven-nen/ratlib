@@ -148,6 +148,9 @@ public class Transaction {
     }
 
     public void printLog() {
+        if (log.isEmpty()) {
+            System.out.println("There are no logs yet.");
+        }
         for (String[] logItem : this.log) {
             for (String item : logItem) {
                 System.out.print(item+"\t");
