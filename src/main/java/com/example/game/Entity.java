@@ -9,6 +9,7 @@ public class Entity implements Attack {
 
     private int level = 1;
 
+    private float dodgeChance = (float) (agility * 1.2 / 100.0); 
     
     /**
      * Returns the level of the entity.
@@ -225,10 +226,18 @@ public class Entity implements Attack {
     /**
      * Takes damage from the given amount.
      * The damage is modified by passiveBlock() before being applied to the entity's HP.
+     * Takes the dodge chance of the entity and rolls a random number, if higher than the
+     * dodge chance the attack does not land.
      * @param amount the amount of damage to take
+     * @return true if damage is taken, otherwise false
      */
-    public void takeDamage(int amount) {
-        this.decreaseHp(passiveBlock(amount));;
+    public boolean takeDamage(int amount) {
+        if (Math.random() > this.dodgeChance) {
+            this.decreaseHp(passiveBlock(amount));
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
