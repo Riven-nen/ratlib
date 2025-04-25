@@ -2,7 +2,6 @@ package com.example.game;
 
 public class Player extends Entity implements Block {
     
-
     /**
      * Player only ability to brace damage. Temporarily raises defense by 4
      * and then calls takeDamage which calls passiveBlock which takes the defense

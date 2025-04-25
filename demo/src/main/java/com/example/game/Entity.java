@@ -65,6 +65,10 @@ public class Entity implements Attack {
         this.hp += hp;
     }
 
+    /**
+     * Decreases the hitpoints of the entity by the given amount.
+     * @param hp the amount of hitpoints to remove
+     */
     public void decreaseHp(int hp) {
         this.hp -= hp;
     }
@@ -125,11 +129,10 @@ public class Entity implements Attack {
         this.agility += agility;
     }
 
-/**
- * Decreases the agility of the entity by the given amount.
- * @param agility the amount of agility to remove
- */
-
+    /**
+     * Decreases the agility of the entity by the given amount.
+     * @param agility the amount of agility to remove
+     */
     public void decreaseAgility(int agility) {
         this.agility -= agility;
     }
@@ -158,6 +161,10 @@ public class Entity implements Attack {
         this.intelligence += intelligence;
     }
 
+    /**
+     * Decreases the intelligence of the entity by the given amount.
+     * @param intelligence the amount of intelligence to remove
+     */
     public void decreaseIntelligence(int intelligence) {
         this.intelligence -= intelligence;
     }
@@ -186,6 +193,10 @@ public class Entity implements Attack {
         this.defense += defense;
     }
 
+    /**
+     * Decreases the defense of the entity by the given amount.
+     * @param defense the amount of defense to remove
+     */
     public void decreaseDefense(int defense) {
         this.defense -= defense;
     }
