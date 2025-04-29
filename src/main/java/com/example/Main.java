@@ -6,8 +6,9 @@ public class Main {
     public static void main(String[] args) {
         GameLogic gameLogic = new GameLogic();
 
-        while ()
-
-        gameLogic.update();
+        while (!gameLogic.validateGameState(GameState.EXIT_GAME)) {
+            gameLogic.update();    
+        }
+        
     }
 }
