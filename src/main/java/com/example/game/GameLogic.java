@@ -11,7 +11,6 @@ public class GameLogic {
     public void update() {
         switch (gameState) {
             case START_GAME -> {
-                BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
                 
                 // This is just for loading Starting game...
                 for (int i = 0 ; i <= 3 ; i++) {
@@ -27,6 +26,13 @@ public class GameLogic {
                     }
                 }
 
+                gameState = GameState.MENU_SCREEN;
+
+            }
+
+            case MENU_SCREEN -> {
+                BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+                
                 System.out.println("[1] New Game\n[2] Multiplayer\n[3] Exit Game");
 
                 // Needs to be outside to access this outside of the while loop scope
@@ -55,7 +61,6 @@ public class GameLogic {
                         this.gameState = GameState.EXIT_GAME;
                     }
                 }
-
             }
 
             case START_COMBAT -> {
