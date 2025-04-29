@@ -1,5 +1,7 @@
 package com.example.game;
 
+import java.util.Random;
+
 public class Entity implements Attack {
     private int hp;
     private int strength;
@@ -9,7 +11,10 @@ public class Entity implements Attack {
 
     private int level = 1;
 
-    private float dodgeChance = (float) (agility * 1.2 / 100.0); 
+    private float dodgeChance = (float) (agility * 1.2 / 100.0);
+    
+    // Decided against using a inherited super() constructor because
+    // player and enemy has different inits
     
     /**
      * Returns the level of the entity.

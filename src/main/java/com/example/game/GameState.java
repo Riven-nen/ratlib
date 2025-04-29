@@ -6,6 +6,7 @@ public enum GameState {
     START_COMBAT,
     PLAYER_TURN,
     ENEMY_TURN,
-    END_COMBAT,
+    VICTORY,
+    DEFEAT,
     EXIT_GAME
 }

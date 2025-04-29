@@ -14,7 +14,7 @@ public class GameLogic {
                 
                 // This is just for loading Starting game...
                 for (int i = 0 ; i <= 3 ; i++) {
-                    StringBuilder sb = new StringBuilder("Starting game");
+                    StringBuilder sb = new StringBuilder("Starting game.");
                     for (int j = 0 ; j < i ; j++) {
                         sb.append(".");
                     }
@@ -25,7 +25,7 @@ public class GameLogic {
                         e.printStackTrace();
                     }
                 }
-
+                // After displaying the message change the state to menu
                 gameState = GameState.MENU_SCREEN;
 
             }
@@ -75,13 +75,17 @@ public class GameLogic {
                 
             }
 
-            case EXIT_GAME -> {
-                System.out.println("Exiting...");
-                System.exit(0);
+            case VICTORY -> {
+
             }
 
-            default -> {
+            case DEFEAT -> {
                 
+            }
+
+            case EXIT_GAME -> {
+                System.out.println("Exiting...");  
+                System.exit(0);
             }
         }
     }

@@ -5,6 +5,15 @@ package com.example.game;
  * The main player class of the package, this will be controlled by the user.
  */
 public class Player extends Entity implements Block {
+
+    public Player() {
+        this.setAgility(5);
+        this.setDefense(5);
+        this.setHp(10);
+        this.setIntelligence(5);
+        this.setStrength(5);
+        this.setLevel(1);
+    }
     
     /**
      *  Determines how many actions a player 
