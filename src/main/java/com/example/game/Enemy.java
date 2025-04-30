@@ -7,7 +7,7 @@ public class Enemy extends Entity {
 
     /**
      * Takes the player level and randomly assigns the core stats
-     * from 0 and the bound being the level of the player.
+     * from 0 to the level of the player.
      * @param level of the player
      */
     public Enemy(int level) {

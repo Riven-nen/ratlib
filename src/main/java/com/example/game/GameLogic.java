@@ -64,15 +64,11 @@ public class GameLogic {
             }
 
             case START_COMBAT -> {
-                gameState = GameState.PLAYER_TURN;
+                gameState = GameState.BATTLE;
             }
 
-            case PLAYER_TURN -> {
-                System.out.println("Player Turn");
-            }
-
-            case ENEMY_TURN -> {
-                
+            case BATTLE -> {
+                BattleManager battleManager = new BattleManager(null)
             }
 
             case VICTORY -> {

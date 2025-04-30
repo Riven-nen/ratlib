@@ -253,4 +253,8 @@ public class Entity implements Attack {
     public void attack(Entity entity) {
         entity.takeDamage(this.strength);
     }
+
+    public void display() {
+        System.out.printf("________\nHP:%d\nLevel:%d",this.hp,this.level);
+    }
 }
