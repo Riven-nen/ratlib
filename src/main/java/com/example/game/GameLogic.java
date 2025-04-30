@@ -12,19 +12,17 @@ public class GameLogic {
         switch (gameState) {
             case START_GAME -> {
                 
+                System.out.print("Starting game");
                 // This is just for loading Starting game...
-                for (int i = 0 ; i <= 3 ; i++) {
-                    StringBuilder sb = new StringBuilder("Starting game.");
-                    for (int j = 0 ; j < i ; j++) {
-                        sb.append(".");
-                    }
-                    System.out.println(sb.toString());
+                for (int i = 0 ; i <= 2 ; i++) {
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    System.out.print(".");
                 }
+                System.out.println();
                 // After displaying the message change the state to menu
                 gameState = GameState.MENU_SCREEN;
 
@@ -68,14 +66,7 @@ public class GameLogic {
             }
 
             case BATTLE -> {
-                BattleManager battleManager = new BattleManager(null)
-            }
-
-            case VICTORY -> {
-
-            }
-
-            case DEFEAT -> {
+                BattleManager battleManager = new BattleManager(null);
                 
             }
 

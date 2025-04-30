@@ -5,7 +5,5 @@ public enum GameState {
     MENU_SCREEN,
     START_COMBAT,
     BATTLE,
-    VICTORY,
-    DEFEAT,
     EXIT_GAME
 }
