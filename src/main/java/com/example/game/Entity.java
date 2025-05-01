@@ -1,7 +1,5 @@
 package com.example.game;
 
-import java.util.Random;
-
 public class Entity implements Attack {
     private int hp;
     private int strength;

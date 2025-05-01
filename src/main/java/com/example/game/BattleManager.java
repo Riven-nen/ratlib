@@ -4,7 +4,7 @@ public class BattleManager {
     private Player player;
     private EnemyManager enemyManager;
     
-    private Battle battle = Battle.PLAYER_TURN;
+    private BattleState battleState = BattleState.PLAYER_TURN;
 
     public BattleManager(Player player) {
         this.player = player;
@@ -12,13 +12,15 @@ public class BattleManager {
     }
     
     public void update() {
-        switch (battle) {
+        switch (battleState) {
             case PLAYER_TURN -> {
+                // TODO: ADD TURN LOGIC AND TARGETTING
                 if (player.getHp() <= 0) {
-                    battle = Battle.DEFEAT;
+                    System.out.println("You have lost...");
+                    battleState = BattleState.DEFEAT;
                 }
                 while (player.getActionPoint() > 0) {
-
+                    
                 }
             }
 
@@ -34,5 +36,9 @@ public class BattleManager {
                 
             }
         }
+    }
+
+    public boolean validateState(BattleState battleState) {
+        return this.battleState == battleState;
     }
 }

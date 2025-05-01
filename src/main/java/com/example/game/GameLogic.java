@@ -6,6 +6,12 @@ import java.io.InputStreamReader;
 
 public class GameLogic {
     
+    private Player player;
+
+    public GameLogic(Player player) {
+        this.player = player;
+    }
+    
     private GameState gameState = GameState.START_GAME;
 
     public void update() {
@@ -28,6 +34,15 @@ public class GameLogic {
 
             }
 
+            /**
+             * This is where the user will choose options
+             * First initialize a bufferedreader to read from the system input
+             * Next a while loop to validate the input is an integer
+             * Lastly handle the choice with a switch statement,
+             * if choice is not 1, 2, or 3 then it will just update again
+             * since the gamestate is still menu_screen they will be prompted to
+             * choose again.
+             */ 
             case MENU_SCREEN -> {
                 BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
                 
@@ -48,7 +63,7 @@ public class GameLogic {
                 
                 switch (choice) {
                     case 1 -> {
-                        System.out.println("Nothing here yet.");
+                        this.gameState = GameState.START_COMBAT;
                     }
 
                     case 2 -> {
@@ -58,16 +73,26 @@ public class GameLogic {
                     case 3 -> {
                         this.gameState = GameState.EXIT_GAME;
                     }
+
+                    default -> {
+                        System.out.println("Invalid Choice!");
+                    }
                 }
             }
 
+            /**
+             *  transition to battle mode - i probably should remove this
+             * it doesnt really do anything lmao lmao lmao
+             */
             case START_COMBAT -> {
                 gameState = GameState.BATTLE;
             }
 
             case BATTLE -> {
-                BattleManager battleManager = new BattleManager(null);
-                
+                BattleManager battleManager = new BattleManager(player);
+                while (!battleManager.validateState(BattleState.DEFEAT) || battleManager.validateState(BattleState.VICTORY)) {
+                    battleManager.update();
+                }       
             }
 
             case EXIT_GAME -> {
@@ -78,12 +103,14 @@ public class GameLogic {
     }
 
     /**
+     * NOTE: MIGHT DEPRECATE THIS, MIGHT NOT BE NEEDED
+     * balls
      * Compares the current GameState with the given GameState.
      *
      * @param gameState The GameState to compare with.
      * @return True if the GameStates are equal, false otherwise.
      */
-    public boolean validateGameState(GameState gameState) {
+    public boolean validateState(GameState gameState) {
         return this.gameState == gameState;
     }
 }

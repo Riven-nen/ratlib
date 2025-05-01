@@ -4,8 +4,9 @@ import com.example.game.*;;
 
 public class Main {
     public static void main(String[] args) {
-        GameLogic gameLogic = new GameLogic();
+        
         Player player = new Player();
+        GameLogic gameLogic = new GameLogic(player);
 
         while (true) {
             gameLogic.update();    
