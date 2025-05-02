@@ -30,18 +30,28 @@ public class BattleManager {
     }
     
     public void update() {
-        display();
         switch (battleState) {
             case PLAYER_TURN -> {
-                // TODO: ADD TURN LOGIC AND TARGETTING
+                // ADD TURN LOGIC AND TARGETTING -- DONE
+                // TODO: HANDLE CONCURRENTMODIFICATIONEXCEPTION
+                // How to replicate: targetting an already dead enemy
                 if (player.getHp() <= 0) {
                     System.out.println("You have lost...");
                     battleState = BattleState.DEFEAT;
                 }
                 while (player.getActionPoint() > 0) {
+                    // Check after every move if the enemy is dead af then
+                    // just remove the bitc 
+                    for (Enemy enemy : enemyManager.getEnemies()) {
+                        if (enemy.getHp() <= 0) {
+                            enemyManager.removeEnemy(enemy);
+                        }
+                    }
+
                     BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
                     int choice;
                     while (true) {
+                        display();
                         System.out.println("Choose your move " + "- " + player.getActionPoint() + " Action Points -");
                         System.out.println("[1] Attack [2] Defend [3] Cast");
                         try {
@@ -60,7 +70,19 @@ public class BattleManager {
                             while (true) {
                                 try {
                                     targetIndex = Integer.parseInt(bf.readLine());
-                                    break;
+                                    /*
+                                        If the target index is less than or equal the size of the
+                                        enemy arraylist, then we are sure there will be no out of bounds
+                                        exception. (Probably)
+                                     */ 
+                                    if (targetIndex <= enemyManager.getEnemies().size()-1) {
+                                        player.attack(enemyManager.getEnemies().get(targetIndex));
+                                        player.removeActionPoint();
+                                        break;
+                                    } else {
+                                        System.out.println("Please enter a valid target!");
+                                        continue;
+                                    }
                                 } catch (IOException | NumberFormatException e) {
                                     System.out.println("Please enter a valid number.");
                                 }
@@ -83,6 +105,8 @@ public class BattleManager {
                     for (Enemy enemy : enemyManager.getEnemies()) {
                         if (enemy.getHp() <= 0) {
                             enemyManager.removeEnemy(enemy);
+                        } else {
+                            enemy.attack(player);
                         }
                     }
                 }
