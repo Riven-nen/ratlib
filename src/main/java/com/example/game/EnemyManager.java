@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class EnemyManager {
     private ArrayList<Enemy> enemies = new ArrayList<>();
-    private Random rand;
+    private Random rand = new Random();
 
     /**
      * Takes the player level as the bound of a random
@@ -25,5 +25,17 @@ public class EnemyManager {
      */
     public ArrayList<Enemy> getEnemies() {
         return this.enemies;
+    }
+
+    public void removeEnemy(int index) {
+        enemies.remove(index);
+    }
+
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
+    }
+
+    public boolean isEmpty() {
+        return enemies.isEmpty();
     }
 }

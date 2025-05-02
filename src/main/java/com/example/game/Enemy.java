@@ -3,7 +3,7 @@ package com.example.game;
 import java.util.Random;
 
 public class Enemy extends Entity {
-    private Random rand;
+    private Random rand = new Random();
 
     /**
      * Takes the player level and randomly assigns the core stats
