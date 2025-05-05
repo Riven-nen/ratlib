@@ -19,6 +19,11 @@ public class EnemyManager {
         }
     }
 
+    // For debug
+    public EnemyManager() {
+
+    }
+
     /**
      * Returns this object's enemy arraylist
      * @return enemies arraylist
@@ -27,15 +32,30 @@ public class EnemyManager {
         return this.enemies;
     }
 
-    public void removeEnemy(int index) {
-        enemies.remove(index);
+    /**
+     * Iterates through the enemies and checks if all enemy
+     * objects are dead
+     * @return true if all enemies in the list are dead, else false.
+     */
+    public boolean areEnemiesDead() {
+        int counter = 0;
+        for (Enemy enemy : enemies) {
+            if (!enemy.isAlive()) {
+                counter++;
+            }
+        }
+
+        return counter == enemies.size();
     }
 
-    public void removeEnemy(Enemy enemy) {
-        enemies.remove(enemy);
-    }
+    public boolean areEnemiesDead(ArrayList<Enemy> enemies) {
+        int counter = 0;
+        for (Enemy enemy : enemies) {
+            if (!enemy.isAlive()) {
+                counter++;
+            }
+        }
 
-    public boolean isEmpty() {
-        return enemies.isEmpty();
+        return counter == enemies.size();
     }
 }

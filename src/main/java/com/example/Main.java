@@ -8,9 +8,7 @@ public class Main {
         Player player = new Player();
         GameLogic gameLogic = new GameLogic(player);
 
-        while (true) {
-            gameLogic.update();    
-        }
+        gameLogic.start();
         
     }
 }

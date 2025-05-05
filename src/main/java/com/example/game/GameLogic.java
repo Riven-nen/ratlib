@@ -90,9 +90,8 @@ public class GameLogic {
 
             case BATTLE -> {
                 BattleManager battleManager = new BattleManager(player);
-                while (!battleManager.validateState(BattleState.DEFEAT) || battleManager.validateState(BattleState.VICTORY)) {
-                    battleManager.update();
-                }       
+                battleManager.start(); 
+                gameState = GameState.MENU_SCREEN;     
             }
 
             case EXIT_GAME -> {
@@ -112,5 +111,11 @@ public class GameLogic {
      */
     public boolean validateState(GameState gameState) {
         return this.gameState == gameState;
+    }
+
+    public void start() {
+        while (true) {
+            update();
+        }
     }
 }
